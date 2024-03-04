@@ -34,7 +34,7 @@ div {
 
 @media screen and (max-width: 600px) {
     div {
-        padding: 20px; /* Adjusted padding for smaller screens */
+        margin: 20px; /* Adjusted padding for smaller screens */
     }
 }
 
