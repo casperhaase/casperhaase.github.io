@@ -32,6 +32,12 @@ div {
     margin: 50px;
 }
 
+@media screen and (max-width: 600px) {
+    div {
+        padding: 20px; /* Adjusted padding for smaller screens */
+    }
+}
+
 /* Footer Styles */
 footer {
     margin-top: auto; /* Push the footer to the bottom of the container */
