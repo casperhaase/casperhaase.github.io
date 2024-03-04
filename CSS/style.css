@@ -1,10 +1,13 @@
 body {
-    background-color: #FFA500; /* Google Analytics Orange */
-    color: #3684EB; /* Google Tag Manager Blue */
+    background-color: #FFA500;
+    /* Google Analytics Orange */
+    color: #3684EB;
+    /* Google Tag Manager Blue */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* Ensure body takes at least the full height of the viewport */
+    min-height: 100vh;
+    /* Ensure body takes at least the full height of the viewport */
     display: flex;
     flex-direction: column;
 }
@@ -14,7 +17,8 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0; /* Prevent header from shrinking when content is added */
+    flex-shrink: 0;
+    /* Prevent header from shrinking when content is added */
 }
 
 h1 {
@@ -24,8 +28,10 @@ h1 {
 
 p {
     font-size: 18px;
-    margin-bottom: 20px; /* Add some spacing between paragraphs */
+    margin-bottom: 20px;
+    /* Add some spacing between paragraphs */
 }
+
 .CookieDeclaration {
     font-size: 16px;
     line-height: 1.5;
@@ -33,27 +39,34 @@ p {
 }
 
 @media screen and (max-width: 600px) {
-    div {
-        margin: 20px; /* Adjusted padding for smaller screens */
+    .CookieDeclaration {
+        margin: 20px;
+        /* Adjusted padding for smaller screens */
     }
 }
 
 /* Footer Styles */
 footer {
-    margin-top: auto; /* Push the footer to the bottom of the container */
+    margin-top: auto;
+    /* Push the footer to the bottom of the container */
     text-align: center;
     padding: 20px;
-    background-color: #3684EB; /* Google Tag Manager Blue */
-    color: #FFA500; /* Google Analytics Orange */
+    background-color: #3684EB;
+    /* Google Tag Manager Blue */
+    color: #FFA500;
+    /* Google Analytics Orange */
 }
 
 footer a {
-    color: #FFA500; /* Google Analytics Orange */
+    color: #FFA500;
+    /* Google Analytics Orange */
     text-decoration: none;
     font-weight: bold;
-    padding-bottom: 2px; /* Adjust padding for spacing */
+    padding-bottom: 2px;
+    /* Adjust padding for spacing */
 }
 
 footer a:hover {
-    text-decoration: underline; /* Underline the link on hover for better visibility */
+    text-decoration: underline;
+    /* Underline the link on hover for better visibility */
 }
