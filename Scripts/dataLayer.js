@@ -415,7 +415,7 @@ function videoStart() {
 function videoFinish() {
     window.dataLayer.push({
         'event': 'video_finish',
-        'faq': 'Tutorial?'
+        'faq': 'Tutorial'
     });
 }
 
