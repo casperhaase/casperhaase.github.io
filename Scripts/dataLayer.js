@@ -541,7 +541,6 @@ function copyItem() {
 }
 
 function copyItems() {
-    console.log('test');
     let copyItems = items.map(item => {
         let copyItem = Object.assign({}, item);
         delete copyItem.index;
