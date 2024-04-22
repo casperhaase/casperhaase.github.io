@@ -12,7 +12,7 @@ function pageView() {
     }
     window.dataLayer.push(
         {
-            'event': 'page_view',
+            'event': 'pageview',
             'user': {
                 'logged_in': true,
                 'account_id': 'abcdef',
