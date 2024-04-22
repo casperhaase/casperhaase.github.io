@@ -150,7 +150,7 @@ function beginCheckout() {
     )
 }
 
-function addPersonalInfo(i) {
+function addPersonalInfo() {
     ecommerceReset();
     let itemsInCart = copyItems();
     window.dataLayer.push(
@@ -393,7 +393,7 @@ function buttonClick() {
 
 function faqClose() {
     window.dataLayer.push({
-        'event': 'faq_open',
+        'event': 'faq_close',
         'faq': 'Wat is de levertijd?'
     });
 }
