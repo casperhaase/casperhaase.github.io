@@ -383,6 +383,40 @@ function headerClick() {
     });
 }
 
+function buttonClick() {
+    window.dataLayer.push({
+        'event': 'button_click',
+        'navigation_text': 'Ga verder'
+    });
+}
+
+function faqClose() {
+    window.dataLayer.push({
+        'event': 'faq_open',
+        'faq': 'Wat is de levertijd?'
+    });
+}
+
+function faqOpen() {
+    window.dataLayer.push({
+        'event': 'faq_open',
+        'faq': 'Wat is de levertijd?'
+    });
+}
+
+function videoStart() {
+    window.dataLayer.push({
+        'event': 'video_start',
+        'video': 'Tutorial'
+    });
+}
+
+function videoFinish() {
+    window.dataLayer.push({
+        'event': 'video_finish',
+        'faq': 'Tutorial?'
+    });
+}
 
 function attachEventListenerById(id, handler) {
     let el = document.getElementById(id);
@@ -427,6 +461,11 @@ attachEventListenerById('filter_use', filterUse);
 attachEventListenerById('sort_use', sortUse);
 attachEventListenerById('no_search_results', noSearchResults);
 attachEventListenerById('header_click', headerClick);
+attachEventListenerById('button_click', buttonClick);
+attachEventListenerById('faq_open', faqOpen);
+attachEventListenerById('faq_close', faqClose);
+attachEventListenerById('video_start', videoStart);
+attachEventListenerById('video_finish', videoFinish);
 
 attachEventListenerById('email', contact);
 
@@ -501,7 +540,7 @@ function copyItem() {
     return copyItem;
 }
 
-function copyItems(){
+function copyItems() {
     console.log('test');
     let copyItems = items.map(item => {
         let copyItem = Object.assign({}, item);
