@@ -36,6 +36,7 @@ function pageView() {
 }
 
 function viewItemList() {
+    ecommerceReset();
     window.dataLayer.push(
         {
             'event': 'view_item_list',
@@ -46,343 +47,389 @@ function viewItemList() {
     )
 }
 
-function selectItem(nr) {
+function selectItem() {
+    ecommerceReset();
     window.dataLayer.push(
         {
             'event': 'select_item',
             'ecommerce': {
-                'items': items[nr]
+                'items': items[itemNumber()]
             }
         }
     )
 }
 
-function viewItem(nr) {
-    delete items[nr].index;
+function viewItem() {
+    ecommerceReset();
+    let itemViewed = copyItem();
     window.dataLayer.push(
         {
             'event': 'view_item',
             'ecommerce': {
-                'items': items[nr]
+                'items': itemViewed
             }
         }
     )
 }
 
-function addToCart(nr, q) {
-    let item = items[nr];
-    delete item.index;
-    item.quantity = q;
-    let value = item.quantity * item.price;
+function addToCart() {
+    ecommerceReset();
+    let itemAddedToCart = copyItem();
+    itemAddedToCart.quantity = quantity();
     window.dataLayer.push(
         {
             'event': 'add_to_cart',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': value,
-                'items': item
+                'value': value(itemAddedToCart),
+                'items': itemAddedToCart
             }
         }
     )
 }
 
-function addToWishlist(nr) {
-    delete items[nr].index;
+function addToWishlist() {
+    ecommerceReset();
+    let itemAddedToWishlist = copyItem();
     window.dataLayer.push(
         {
             'event': 'add_to_wishlist',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': items[nr].price,
-                'items': items[nr]
+                'value': itemAddedToWishlist.price,
+                'items': itemAddedToWishlist
             }
         }
     )
 }
 
-function removeFromCart(nr, q) {
-    let item = items[nr];
-    delete item.index;
-    item.quantity = q;
-    let value = item.quantity * item.price;
+function removeFromCart() {
+    ecommerceReset();
+    let itemRemovedFromCart = copyItem();
+    itemRemovedFromCart.quantity = quantity();
     window.dataLayer.push(
         {
             'event': 'remove_from_cart',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': value,
-                'items': item
+                'value': value(itemRemovedFromCart),
+                'items': itemRemovedFromCart
             }
         }
     )
 }
 
-function viewCart(i) {
-    let value = 0;
-    i.forEach(el => {
-        value += el.quantity * el.price;
-    });
+function viewCart() {
+    ecommerceReset();
+    let itemsInCart = copyItems();
     window.dataLayer.push(
         {
             'event': 'view_cart',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': value,
-                'items': i
+                'value': value(itemsInCart),
+                'items': itemsInCart
             }
         }
     )
 }
 
-function beginCheckout(i) {
-    let value = 0;
-    i.forEach(el => {
-        value += el.quantity * el.price;
-    });
+function beginCheckout() {
+    ecommerceReset();
+    let itemsInCart = copyItems();
     window.dataLayer.push(
         {
             'event': 'begin_checkout',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': value,
-                'items': i
+                'value': value(itemsInCart),
+                'items': itemsInCart
             }
         }
     )
 }
 
 function addPersonalInfo(i) {
-    let value = 0;
-    i.forEach(el => {
-        value += el.quantity * el.price;
-    });
+    ecommerceReset();
+    let itemsInCart = copyItems();
     window.dataLayer.push(
         {
-            'event': 'add_personal_info',
+            'event': 'begin_checkout',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': value,
-                'items': i
+                'value': value(itemsInCart),
+                'items': itemsInCart
             }
         }
     )
 }
 
+
 function addShippingInfo(i) {
-    let value = 0;
-    i.forEach(el => {
-        value += el.quantity * el.price;
-    });
+    ecommerceReset();
+    let itemsInCart = copyItems();
     window.dataLayer.push(
         {
             'event': 'add_shipping_info',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': value,
+                'value': value(itemsInCart),
                 'shipping_tier': 'PostNL',
-                'items': i
+                'items': itemsInCart
             }
         }
     )
 }
 
 function addPaymentInfo(i) {
-    let value = 0;
-    i.forEach(el => {
-        value += el.quantity * el.price;
-    });
+    ecommerceReset();
+    let itemsInCart = copyItems();
     window.dataLayer.push(
         {
             'event': 'add_payment_info',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': value,
+                'value': value(itemsInCart),
                 'shipping_tier': 'PostNL',
                 'payment_type': 'IDEAL',
-                'items': i
+                'items': itemsInCart
             }
         }
     )
 }
 
 function purchase(i) {
-    let value = 0;
-    i.forEach(el => {
-        value += el.quantity * el.price;
-    });
-    let tax = value * 0.21;
-    let tid = transactionId()
+    ecommerceReset();
+    let itemsInCart = copyItems();
     window.dataLayer.push(
         {
             'event': 'purchase',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': value,
+                'value': value(itemsInCart),
                 'shipping_tier': 'PostNL',
                 'payment_type': 'IDEAL',
-                'items': i,
-                'transaction_id': tid,
+                'items': itemsInCart,
+                'transaction_id': transactionId(),
                 'shipping': 1.50,
-                'tax': tax
+                'tax': value(itemsInCart) * 0.21 / 1.21
             },
             'enhanced_conversion_data': enhancedConversionData
         }
     )
 }
 
+function ecommerceReset() {
+    window.dataLayer.push({
+        'ecommerce': null
+    })
+}
+
 function contact() {
-    window.dataLayer.push(
-        {
-            'event': 'contact',
-            'method': 'email'
-        }
-    );
+    window.dataLayer.push({
+        'event': 'contact',
+        'method': 'email'
+    });
 }
 
-let pageViewEl = document.getElementById('page_view');
-if (pageViewEl) {
-    pageViewEl.addEventListener('click', pageView);
+function footerClick() {
+    window.dataLayer.push({
+        'event': 'footer_click',
+        'navigation_text': 'Contact'
+    });
 }
 
-let viewItemListEl = document.getElementById('view_item_list');
-if (viewItemListEl) {
-    viewItemListEl.addEventListener('click', viewItemList);
+function login() {
+    window.dataLayer.push({
+        'event': 'login',
+        'account_id': 'abcdef',
+        'account_type': 'consumer',
+        'email': 'test@test.nl'
+    });
 }
 
-let selectItemEl = document.getElementById('select_item');
-if (selectItemEl) {
-    selectItemEl.addEventListener('click', function () {
-        let nr = itemNumber();
-        selectItem(nr);
+function navigationUse() {
+    window.dataLayer.push({
+        'event': 'navigation_use',
+        'navigation_text': 'Products',
+        'navigation_level': 2
+    });
+}
+
+function newsletterSubscription() {
+    window.dataLayer.push({
+        'event': 'newsletter_subscription',
+        'form_id': 'footer',
+        'email': 'test@test.nl'
+    });
+}
+
+function popupClose() {
+    window.dataLayer.push({
+        'event': 'popup_close',
+        'popup_id': 'abc'
+    });
+}
+
+function popupCta() {
+    window.dataLayer.push({
+        'event': 'popup_cta',
+        'popup_id': 'abc'
+    });
+}
+
+function popupVisible() {
+    window.dataLayer.push({
+        'event': 'popup_visible',
+        'popup_id': 'abc'
+    });
+}
+
+function searchUse() {
+    window.dataLayer.push({
+        'event': 'search_use',
+        'search_action': 'search',
+        'search_query': 'Trui'
+    });
+}
+
+function signUp() {
+    window.dataLayer.push({
+        'event': 'sign_up',
+        'account_id': 'abcdef',
+        'account_type': 'consumer',
+        'email': 'test@test.nl'
+    });
+}
+
+function textMessage() {
+    window.dataLayer.push({
+        'event': 'text_message',
+        'message_text': 'Aanbieding 2 voor de prijs van 1'
+    });
+}
+
+function validationMessage() {
+    window.dataLayer.push({
+        'event': 'validation_message',
+        'validation_text': 'Invalid input',
+        'validation_field': 'email'
+    });
+}
+
+function photoLast() {
+    window.dataLayer.push({
+        'event': 'photo_last',
+        'product': items[itemNumber()].item_id
+    });
+}
+
+function photoNext() {
+    window.dataLayer.push({
+        'event': 'photo_next',
+        'product': items[itemNumber()].item_id
+    });
+}
+
+function photoPrevious() {
+    window.dataLayer.push({
+        'event': 'photo_previous',
+        'product': items[itemNumber()].item_id
+    });
+}
+
+function photoZoom() {
+    window.dataLayer.push({
+        'event': 'photo_zoom',
+        'product': items[itemNumber()].item_id,
+        'index': quantity()
+    });
+}
+
+function reviewSubmit() {
+    window.dataLayer.push({
+        'event': 'review_submit',
+        'product': items[itemNumber()].item_id,
+        'review_rating': quantity()
+    });
+}
+
+function filterUse() {
+    window.dataLayer.push({
+        'event': 'filter_use',
+        'filter_group': 'category',
+        'filter_option': 'Truien'
+    });
+}
+
+function sortUse() {
+    window.dataLayer.push({
+        'event': 'sort_use',
+        'sort_option': 'price_low_to_high'
+    });
+}
+
+function noSearchResults() {
+    window.dataLayer.push({
+        'event': 'no_search_results',
+        'search_query': 'ytiom'
+    });
+}
+
+function headerClick() {
+    window.dataLayer.push({
+        'event': 'header_click',
+        'navigation_text': 'logo'
+    });
+}
+
+
+function attachEventListenerById(id, handler) {
+    let el = document.getElementById(id);
+    if (el) {
+        el.addEventListener('click', handler)
     }
-    )
 }
 
-let viewItemEl = document.getElementById('view_item');
-if (viewItemEl) {
-    viewItemEl.addEventListener('click', function () {
-        let nr = itemNumber();
-        viewItem(nr);
-    }
-    )
-}
+attachEventListenerById('page_view', pageView);
 
-let addToCartEl = document.getElementById('add_to_cart');
-if (addToCartEl) {
-    addToCartEl.addEventListener('click', function () {
-        let nr = itemNumber();
-        let q = quantity();
-        addToCart(nr, q);
-    }
-    )
-}
+attachEventListenerById('view_item_list', viewItemList);
+attachEventListenerById('select_item', selectItem);
+attachEventListenerById('view_item', viewItem);
+attachEventListenerById('add_to_cart', addToCart);
+attachEventListenerById('add_to_wishlist', addToWishlist);
+attachEventListenerById('remove_from_cart', removeFromCart);
+attachEventListenerById('view_cart', viewCart);
+attachEventListenerById('begin_checkout', beginCheckout);
+attachEventListenerById('add_personal_info', addPersonalInfo);
+attachEventListenerById('add_shipping_info', addShippingInfo);
+attachEventListenerById('add_payment_info', addPaymentInfo);
+attachEventListenerById('purchase', purchase);
 
-let addToWishlistEl = document.getElementById('add_to_wishlist');
-if (addToWishlistEl) {
-    addToWishlistEl.addEventListener('click', function () {
-        let nr = itemNumber();
-        addToWishlist(nr);
-    }
-    )
-}
+attachEventListenerById('contact', contact);
+attachEventListenerById('footer_click', footerClick);
+attachEventListenerById('login', login);
+attachEventListenerById('navigation_use', navigationUse);
+attachEventListenerById('newsletter_subscription', newsletterSubscription);
+attachEventListenerById('popup_close', popupClose);
+attachEventListenerById('popup_cta', popupCta);
+attachEventListenerById('popup_visible', popupVisible);
+attachEventListenerById('search_use', searchUse);
+attachEventListenerById('sign_up', signUp);
+attachEventListenerById('text_message', textMessage);
+attachEventListenerById('validation_message', validationMessage);
+attachEventListenerById('photo_last', photoLast);
+attachEventListenerById('photo_next', photoNext);
+attachEventListenerById('photo_previous', photoPrevious);
+attachEventListenerById('photo_zoom', photoZoom);
+attachEventListenerById('review_submit', reviewSubmit);
+attachEventListenerById('filter_use', filterUse);
+attachEventListenerById('sort_use', sortUse);
+attachEventListenerById('no_search_results', noSearchResults);
+attachEventListenerById('header_click', headerClick);
 
-let removeFromCartEl = document.getElementById('remove_from_cart');
-if (removeFromCartEl) {
-    removeFromCartEl.addEventListener('click', function () {
-        let nr = itemNumber();
-        let q = quantity();
-        removeFromCart(nr, q);
-    }
-    )
-}
+attachEventListenerById('email', contact);
 
-let viewCartEl = document.getElementById('view_cart');
-if (viewCartEl) {
-    viewCartEl.addEventListener('click', function () {
-        let itemsInCart = items;
-        itemsInCart.forEach(el => {
-            el.quantity = quantity();
-            delete el.index;
-        });
-        viewCart(itemsInCart);
-    }
-    )
-}
-
-let beginCheckoutEl = document.getElementById('begin_checkout');
-if (beginCheckoutEl) {
-    beginCheckoutEl.addEventListener('click', function () {
-        let itemsInCart = items;
-        itemsInCart.forEach(el => {
-            el.quantity = quantity();
-            delete el.index;
-        });
-        beginCheckout(itemsInCart);
-    }
-    )
-}
-
-let addPersonalInfoEl = document.getElementById('add_personal_info');
-if (addPersonalInfoEl) {
-    addPersonalInfoEl.addEventListener('click', function () {
-        let itemsInCart = items;
-        itemsInCart.forEach(el => {
-            el.quantity = quantity();
-            delete el.index;
-        });
-        beginCheckout(itemsInCart);
-    }
-    )
-}
-
-let addShippingInfoEl = document.getElementById('add_shipping_info');
-if (addShippingInfoEl) {
-    addShippingInfoEl.addEventListener('click', function () {
-        let itemsInCart = items;
-        itemsInCart.forEach(el => {
-            el.quantity = quantity();
-            delete el.index;
-        });
-        addShippingInfo(itemsInCart);
-    }
-    )
-}
-
-let addPaymentInfoEL = document.getElementById('add_payment_info');
-if (addPaymentInfoEL) {
-    addPaymentInfoEL.addEventListener('click', function () {
-        let itemsInCart = items;
-        itemsInCart.forEach(el => {
-            el.quantity = quantity();
-            delete el.index;
-        });
-        addPaymentInfo(itemsInCart);
-    }
-    )
-}
-
-let purchaseEl = document.getElementById('purchase');
-if (purchaseEl) {
-    purchaseEl.addEventListener('click', function () {
-        let itemsInCart = items;
-        itemsInCart.forEach(el => {
-            el.quantity = quantity();
-            delete el.index;
-        });
-        purchase(itemsInCart);
-    }
-    )
-}
-
-let contactEl = document.getElementById('contact');
-if (contactEl) {
-    contactEl.addEventListener('click', contact);
-}
-
-let emailEl = document.getElementById('email');
-if (emailEl) {
-    emailEl.addEventListener('click', contact);
-}
 
 let items = [
     {
@@ -445,6 +492,37 @@ let enhancedConversionData = {
         'country': 'UK'
     }
 
+}
+
+function copyItem() {
+    //let nr = itemNumber();
+    let copyItem = Object.assign({}, items[itemNumber()]);
+    delete copyItem.index;
+    return copyItem;
+}
+
+function copyItems(){
+    console.log('test');
+    let copyItems = items.map(item => {
+        let copyItem = Object.assign({}, item);
+        delete copyItem.index;
+        copyItem.quantity = quantity();
+        return copyItem;
+    });
+    return copyItems;
+}
+
+function value(arr) {
+    if (!Array.isArray(arr)) {
+        return arr.price * arr.quantity
+    }
+    else {
+        let value = 0;
+        arr.forEach(obj => {
+            value += obj.quantity * obj.price;
+        });
+        return value;
+    }
 }
 
 function itemNumber() {
