@@ -65,9 +65,9 @@ function viewItem() {
     window.dataLayer.push(
         {
             'event': 'view_item',
-            'value': itemViewed[0].price,
             'ecommerce': {
-                'items': itemViewed
+                'items': itemViewed,
+                'value': itemViewed[0].price
             }
         }
     )
