@@ -53,7 +53,7 @@ function selectItem() {
         {
             'event': 'select_item',
             'ecommerce': {
-                'items': items[itemNumber()]
+                'items': [items[itemNumber()]]
             }
         }
     )
@@ -534,10 +534,11 @@ let enhancedConversionData = {
 }
 
 function copyItem() {
-    //let nr = itemNumber();
     let copyItem = Object.assign({}, items[itemNumber()]);
     delete copyItem.index;
-    return copyItem;
+    let copyItemArr = [];
+    copyItemArr.push(copyItem);
+    return copyItemArr;
 }
 
 function copyItems() {
