@@ -155,7 +155,7 @@ function addPersonalInfo(i) {
     let itemsInCart = copyItems();
     window.dataLayer.push(
         {
-            'event': 'begin_checkout',
+            'event': 'add_personal_info',
             'ecommerce': {
                 'currency': 'EUR',
                 'value': value(itemsInCart),
