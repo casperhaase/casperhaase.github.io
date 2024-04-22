@@ -536,9 +536,7 @@ let enhancedConversionData = {
 function copyItem() {
     let copyItem = Object.assign({}, items[itemNumber()]);
     delete copyItem.index;
-    let copyItemArr = [];
-    copyItemArr.push(copyItem);
-    return copyItemArr;
+    return [copyItem];
 }
 
 function copyItems() {
