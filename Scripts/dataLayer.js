@@ -65,6 +65,7 @@ function viewItem() {
     window.dataLayer.push(
         {
             'event': 'view_item',
+            'value': itemViewed[0].price,
             'ecommerce': {
                 'items': itemViewed
             }
@@ -75,7 +76,7 @@ function viewItem() {
 function addToCart() {
     ecommerceReset();
     let itemAddedToCart = copyItem();
-    itemAddedToCart.quantity = quantity();
+    itemAddedToCart[0].quantity = quantity();
     window.dataLayer.push(
         {
             'event': 'add_to_cart',
@@ -96,7 +97,7 @@ function addToWishlist() {
             'event': 'add_to_wishlist',
             'ecommerce': {
                 'currency': 'EUR',
-                'value': itemAddedToWishlist.price,
+                'value': itemAddedToWishlist[0].price,
                 'items': itemAddedToWishlist
             }
         }
@@ -106,7 +107,7 @@ function addToWishlist() {
 function removeFromCart() {
     ecommerceReset();
     let itemRemovedFromCart = copyItem();
-    itemRemovedFromCart.quantity = quantity();
+    itemRemovedFromCart[0].quantity = quantity();
     window.dataLayer.push(
         {
             'event': 'remove_from_cart',
@@ -551,17 +552,13 @@ function copyItems() {
 }
 
 function value(arr) {
-    if (!Array.isArray(arr)) {
-        return arr.price * arr.quantity
-    }
-    else {
-        let value = 0;
-        arr.forEach(obj => {
-            value += obj.quantity * obj.price;
-        });
-        return value;
-    }
+    let value = 0;
+    arr.forEach(obj => {
+        value += obj.quantity * obj.price;
+    });
+    return value;
 }
+
 
 function itemNumber() {
     return Math.floor(Math.random() * 3);
