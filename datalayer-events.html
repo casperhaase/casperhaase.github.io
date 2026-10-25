@@ -11,7 +11,7 @@
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOEC - Haase Online & Ecommerce Consultancy</title>
+    <title>HOEC - DataLayer Events Testing Suite</title>
     <link rel="stylesheet" href="CSS/normalize.css">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -25,69 +25,139 @@
           "url": "https://www.hoec.nl",
           "logo": "https://www.hoec.nl/Logo-Hoec-klein-geknipt.png"
         }
-        </script>
+    </script>
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9FP3FFD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <header>
-        <h1><a href="https://www.hoec.nl/">HOEC</a></h1>
-        <p>Haase Online & Ecommerce Consultancy</p>
-        <a href="https://www.hoec.nl/contact">Contact</a>
+        <div class="header-container">
+            <a href="/" class="logo-brand">
+                <img src="Logo-Hoec-klein-geknipt.png" alt="HOEC Logo" class="logo-img">
+                <div class="logo-text-group">
+                    <span class="logo-title">HOEC</span>
+                    <span class="logo-subtitle">Haase Online & Ecommerce Consultancy</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a href="/" class="active">Home</a>
+                <a href="/datalayer-events">DataLayer Events</a>
+                <a href="/contact" class="btn-nav-primary">Contact</a>
+            </nav>
+        </div>
     </header>
-    <div id="EE_events">
-        <h2>Enhanced Ecommerce Events</h2>
-        <ul>
-            <li><a href="#" id="page_view">page_view</a></li>
-            <li><a href="#" id="view_item_list">view_item_list</a></li>
-            <li><a href="#" id="select_item">select_item</a></li>
-            <li><a href="#" id="view_item">view_item</a></li>
-            <li><a href="#" id="add_to_cart">add_to_cart</a></li>
-            <li><a href="#" id="add_to_wishlist">add_to_wishlist</a></li>
-            <li><a href="#" id="remove_from_cart">remove_from_cart</a></li>
-            <li><a href="#" id="view_cart">view_cart</a></li>
-            <li><a href="#" id="begin_checkout">begin_checkout</a></li>
-            <li><a href="#" id="add_personal_info">add_personal_info</a></li>
-            <li><a href="#" id="add_shipping_info">add_shipping_info</a></li>
-            <li><a href="#" id="add_payment_info">add_payment_info</a></li>
-            <li><a href="#" id="purchase">purchase</a></li>
-        </ul>
-    </div>
-    <div id="interaction_events">
-        <h2>Interaction Events</h2>
-        <ul>
-            <li><a href="#" id="contact">contact</a></li>
-            <li><a href="#" id="footer_click">footer_click</a></li>
-            <li><a href="#" id="header_click">header_click</a></li>
-            <li><a href="#" id="login">login</a></li>
-            <li><a href="#" id="navigation_use">navigation_use</a></li>
-            <li><a href="#" id="newsletter_subscription">newsletter_subscription</a></li>
-            <li><a href="#" id="popup_close">popup_close</a></li>
-            <li><a href="#" id="popup_cta">popup_cta</a></li>
-            <li><a href="#" id="popup_visible">popup_visible</a></li>
-            <li><a href="#" id="search_use">search_use</a></li>
-            <li><a href="#" id="sign_up">sign_up</a></li>
-            <li><a href="#" id="text_message">text_message</a></li>
-            <li><a href="#" id="validation_message">validation_message</a></li>
-            <li><a href="#" id="photo_last">photo_last</a></li>
-            <li><a href="#" id="photo_next">photo_next</a></li>
-            <li><a href="#" id="photo_previous">photo_previous</a></li>
-            <li><a href="#" id="photo_zoom">photo_zoom</a></li>
-            <li><a href="#" id="review_submit">review_submit</a></li>
-            <li><a href="#" id="filter_use">filter_use</a></li>
-            <li><a href="#" id="sort_use">sort_use</a></li>
-            <li><a href="#" id="no_search_results">no_search_results</a></li>
-            <li><a href="#" id="button_click">button_click</a></li>
-            <li><a href="#" id="faq_close">faq_close</a></li>
-            <li><a href="#" id="faq_open">faq_open</a></li>
-            <li><a href="#" id="video_start">video_start</a></li>
-            <li><a href="#" id="video_finish">video_finish</a></li>
-        </ul>
-    </div>
+
+    <main class="container">
+        <div style="margin-bottom: 2rem;">
+            <h1 class="section-title">DataLayer Event Testing Lab</h1>
+            <p class="section-desc">Click any button below to trigger and test Google Tag Manager dataLayer events in real-time.</p>
+        </div>
+
+        <section class="event-section" id="EE_events">
+            <h2>🛒 Enhanced Ecommerce Events</h2>
+            <ul class="event-list">
+                <li><a href="#" id="page_view" class="event-btn">page_view</a></li>
+                <li><a href="#" id="view_item_list" class="event-btn">view_item_list</a></li>
+                <li><a href="#" id="select_item" class="event-btn">select_item</a></li>
+                <li><a href="#" id="view_item" class="event-btn">view_item</a></li>
+                <li><a href="#" id="add_to_cart" class="event-btn">add_to_cart</a></li>
+                <li><a href="#" id="add_to_wishlist" class="event-btn">add_to_wishlist</a></li>
+                <li><a href="#" id="remove_from_cart" class="event-btn">remove_from_cart</a></li>
+                <li><a href="#" id="view_cart" class="event-btn">view_cart</a></li>
+                <li><a href="#" id="begin_checkout" class="event-btn">begin_checkout</a></li>
+                <li><a href="#" id="add_personal_info" class="event-btn">add_personal_info</a></li>
+                <li><a href="#" id="add_shipping_info" class="event-btn">add_shipping_info</a></li>
+                <li><a href="#" id="add_payment_info" class="event-btn">add_payment_info</a></li>
+                <li><a href="#" id="purchase" class="event-btn">purchase</a></li>
+            </ul>
+        </section>
+
+        <section class="event-section" id="interaction_events">
+            <h2>⚡ Interaction & Behavioral Events</h2>
+            <ul class="event-list">
+                <li><a href="#" id="contact" class="event-btn">contact</a></li>
+                <li><a href="#" id="footer_click" class="event-btn">footer_click</a></li>
+                <li><a href="#" id="header_click" class="event-btn">header_click</a></li>
+                <li><a href="#" id="login" class="event-btn">login</a></li>
+                <li><a href="#" id="navigation_use" class="event-btn">navigation_use</a></li>
+                <li><a href="#" id="newsletter_subscription" class="event-btn">newsletter_subscription</a></li>
+                <li><a href="#" id="popup_close" class="event-btn">popup_close</a></li>
+                <li><a href="#" id="popup_cta" class="event-btn">popup_cta</a></li>
+                <li><a href="#" id="popup_visible" class="event-btn">popup_visible</a></li>
+                <li><a href="#" id="search_use" class="event-btn">search_use</a></li>
+                <li><a href="#" id="sign_up" class="event-btn">sign_up</a></li>
+                <li><a href="#" id="text_message" class="event-btn">text_message</a></li>
+                <li><a href="#" id="validation_message" class="event-btn">validation_message</a></li>
+                <li><a href="#" id="photo_last" class="event-btn">photo_last</a></li>
+                <li><a href="#" id="photo_next" class="event-btn">photo_next</a></li>
+                <li><a href="#" id="photo_previous" class="event-btn">photo_previous</a></li>
+                <li><a href="#" id="photo_zoom" class="event-btn">photo_zoom</a></li>
+                <li><a href="#" id="review_submit" class="event-btn">review_submit</a></li>
+                <li><a href="#" id="filter_use" class="event-btn">filter_use</a></li>
+                <li><a href="#" id="sort_use" class="event-btn">sort_use</a></li>
+                <li><a href="#" id="no_search_results" class="event-btn">no_search_results</a></li>
+                <li><a href="#" id="button_click" class="event-btn">button_click</a></li>
+                <li><a href="#" id="faq_close" class="event-btn">faq_close</a></li>
+                <li><a href="#" id="faq_open" class="event-btn">faq_open</a></li>
+                <li><a href="#" id="video_start" class="event-btn">video_start</a></li>
+                <li><a href="#" id="video_finish" class="event-btn">video_finish</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <div id="toast-container"></div>
+
     <footer>
-        <p>&copy; 2024 HOEC - Haase Online & Ecommerce Consultancy</p>
-        <p><a href="https://www.hoec.nl/cookie-policy">Cookie Policy</a></p>
+        <div class="footer-container">
+            <div class="footer-top">
+                <a href="/" class="footer-brand">HOEC</a>
+                                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/datalayer-events">DataLayer Events</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/cookie-policy">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HOEC - Haase Online & Ecommerce Consultancy. All rights reserved.</p>
+                <p><a href="/cookie-policy">Cookie Policy</a></p>
+            </div>
+        </div>
     </footer>
+
     <script src="Scripts/dataLayer.js"></script>
+    <script>
+        // Visual feedback when clicking event buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('toast-container');
+            
+            document.querySelectorAll('.event-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    if (btn.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                    const eventName = this.innerText;
+                    showToast('dataLayer event pushed: ' + eventName);
+                });
+            });
+
+            function showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.innerHTML = '<span>🚀</span> <span>' + message + '</span>';
+                container.appendChild(toast);
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.3s ease';
+                    setTimeout(() => toast.remove(), 300);
+                }, 2500);
+            }
+        });
+    </script>
 </body>
 
 </html>
